@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { NgForm } from '@angular/forms';
 import { TableModel } from '../table.model';
 @Component({
   selector: 'app-create-table',
@@ -7,9 +6,7 @@ import { TableModel } from '../table.model';
   styleUrls: ['./create-table.component.scss']
 })
 export class CreateTableComponent implements OnInit {
-  // editData: TableModel; // property to consume TableModel properties while editing form
-  // isNewRow = false; // boolean to render add row
-
+  // hide: boolean = false;
 
   // Json to show data inside table
   rows: TableModel[] = [
@@ -38,29 +35,6 @@ export class CreateTableComponent implements OnInit {
     this.onCalc();
   }
 
-  // onSave(form: NgForm) {
-  //   form.reset();
-  // }
-
-  // Function to add new row in a table
-  // onAddSubmit(addedData: TableModel) {
-  //   this.rows.push({
-  //     name: addedData.name,
-  //     rate: addedData.rate,
-  //     quantity: addedData.quantity,
-  //     basicCost: addedData.basicCost,
-  //     discount: addedData.discount,
-  //     discountAmt: addedData.discountAmt,
-  //     finalBasicCost: addedData.finalBasicCost
-  //   });
-  //   this.isNewRow = false;
-  // }
-
-  // to cancel form
-  // onCancel() {
-  //   this.isNewRow = false;
-  // }
-
   onClick(i: number) {
 
     //For Basic Cost
@@ -78,27 +52,30 @@ export class CreateTableComponent implements OnInit {
     // For Total Cost
     this.rows[i].totalCost = this.rows[i].finalBasicCost + this.rows[i].taxAmt;
 
+    this.onCalc();
+
     }
 
       Total_Basic_cost: number;
-      Total_discountAmt: number;
+      Total_discount_Amt: number;
       Total_final_Basic_Cost: number;
       Total_Tax: number;
       Final_Price: number;
 
     onCalc() {
       this.Total_Basic_cost = 0;
-      this.Total_discountAmt = 0;
+      this.Total_discount_Amt = 0;
       this.Total_final_Basic_Cost = 0;
       this.Total_Tax = 0;
       this.Final_Price = 0;
 
-        for(let a = 0; a<this.rows.length; a++) {
-          this.Total_Basic_cost= this.rows[a].basicCost + this.Total_Basic_cost;
-          this.Total_discountAmt = this.rows[a].discountAmt + this.Total_discountAmt;
-          this.Total_final_Basic_Cost = this.rows[a].finalBasicCost + this.Total_final_Basic_Cost;
+        for(let a = 0; a < this.rows.length; a++) {
+
+          this.Total_Basic_cost += this.rows[a].basicCost;
+          this.Total_discount_Amt += this.rows[a].discountAmt;
+          this.Total_final_Basic_Cost += this.rows[a].finalBasicCost;
           this.Total_Tax += this.rows[a].taxAmt;
-          this.Final_Price = this.Total_Basic_cost + this.Total_discountAmt + this.Total_final_Basic_Cost + this.Total_Tax;
+          this.Final_Price = this.Total_final_Basic_Cost + this.Total_Tax;
         }
     }
 
@@ -117,9 +94,13 @@ export class CreateTableComponent implements OnInit {
       });
     }
 
-    // addItem(index: number) {
-    //   var currentElement = this.rows[index];  
-    //   this.rows.splice(index, 0, currentElement);
+    onSave(data:TableModel) {
+      if(data)
+         console.log(data);
+    //   for(let i = 0; i < this.rows.length; i++) {
+    //   if(this.rows[i].name === '' && this.rows[i].rate === null && this.rows[i].quantity === null && this.rows[i].discount === null && this.rows[i].taxes === null)
+    //   console.log(data);
     // }
+  }
 
 }

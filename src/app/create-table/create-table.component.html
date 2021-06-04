@@ -1,4 +1,4 @@
-<div class="container" *ngIf="!isNewRow">
+<div class="container">
     <br>
     <div class="row">
         <div class="col-xs-12">
@@ -36,31 +36,31 @@
                             <input type="text" class="form-control" name="name" [(ngModel)]="row.name">
                         </td>
                         <td>
-                            <input type="number" class="form-control" name="rate" [(ngModel)]="row.rate" (keyup)="onClick(i);">
+                            <input type="text" class="form-control" name="rate" [(ngModel)]="row.rate" (keyup)="onClick(i);">
                         </td>
                         <td>
-                            <input type="number" class="form-control" name="quantity" [(ngModel)]="row.quantity" (keyup)="onClick(i);onCalc()">
+                            <input type="text" class="form-control" name="quantity" [(ngModel)]="row.quantity" (keyup)="onClick(i)">
                         </td>
                         <td>
-                            <input disabled="true" type="number" class="form-control" name="basicCost" [(ngModel)]="row.basicCost">
+                            <input disabled type="text" class="form-control" name="basicCost" [(ngModel)]="row.basicCost">
                         </td>
                         <td>
-                            <input type="number" class="form-control" name="discount" [(ngModel)]="row.discount"  (keyup)="onClick(i);onCalc()">
+                            <input type="text" class="form-control" name="discount" [(ngModel)]="row.discount"  (keyup)="onClick(i)">
                         </td>
                         <td>
-                            <input disabled="true" type="number" class="form-control" name="discountAmt" [(ngModel)]="row.discountAmt">
+                            <input disabled type="text" class="form-control" name="discountAmt" [(ngModel)]="row.discountAmt">
                         </td>
                         <td>
-                            <input disabled="true" type="number" class="form-control" name="finalBasicCost" [(ngModel)]="row.finalBasicCost">
+                            <input disabled type="text" class="form-control" name="finalBasicCost" [(ngModel)]="row.finalBasicCost">
                         </td>
                         <td>
-                            <input type="number" class="form-control" name="taxes" [(ngModel)]="row.taxes" (keyup)="onClick(i);onCalc()">
+                            <input type="text" class="form-control" name="taxes" [(ngModel)]="row.taxes" (keyup)="onClick(i)">
                         </td>
                         <td>
-                            <input disabled="true" type="number" class="form-control" name="taxAmt" [(ngModel)]="row.taxAmt">
+                            <input disabled type="text" class="form-control" name="taxAmt" [(ngModel)]="row.taxAmt">
                         </td>
                         <td>
-                            <input disabled="true" type="number" class="form-control" name="totalCost" [(ngModel)]="row.totalCost">
+                            <input disabled type="text" class="form-control" name="totalCost" [(ngModel)]="row.totalCost">
                         </td>
                         <td>
                             <button class="btn btn-danger" (click)="onDelete(i)">Delete</button>
@@ -72,42 +72,41 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="true">Save</button>
+    <button type="submit" class="btn btn-primary" (click)="onSave(rows)" [disabled]="false">Save</button>
 
     <table class="table table-bordered" style="width:40%;float:right">
         <tbody>
             <tr>
                 <th>Total Basic Costs</th>
                 <td>
-                    <input disabled="true" type="number" class="form-control" name="Total_Basic_cost" [(ngModel)]="Total_Basic_cost">
+                    <input disabled type="text" class="form-control" name="Total_Basic_cost" [(ngModel)]="Total_Basic_cost">
                 </td>
             </tr>
             <tr>
                 <th>Total Discount</th>
                 <td>
-                    <input disabled="true" type="number" class="form-control" name="Total_discountAmt" [(ngModel)]="Total_discountAmt">
+                    <input disabled type="text" class="form-control" name="Total_discount_Amt" [(ngModel)]="Total_discount_Amt">
                 </td>
             </tr>
             <tr>
                 <th>Total Final Basic Cost</th>
                 <td>
-                    <input disabled="true" type="number" class="form-control" name="Total_final_Basic_Cost" [(ngModel)]="Total_final_Basic_Cost">
+                    <input disabled type="text" class="form-control" name="Total_final_Basic_Cost" [(ngModel)]="Total_final_Basic_Cost">
                 </td>
             </tr>
             <tr>
                 <th>Total Tax</th>
                 <td>
-                    <input disabled="true" type="number" class="form-control" name="Total_Tax" [(ngModel)]="Total_Tax">
+                    <input disabled type="text" class="form-control" name="Total_Tax" [(ngModel)]="Total_Tax">
                 </td>
             </tr>
             <tr>
                 <th>Final Price</th>
                 <td>
-                    <input disabled="true" type="number" class="form-control" name="Final_Price" [(ngModel)]="Final_Price">
+                    <input disabled type="text" class="form-control" name="Final_Price" [(ngModel)]="Final_Price">
                 </td>
             </tr>
         </tbody>
     </table>
 
 </div>
-<!-- <app-add-row (addedRow)="onAddSubmit($event)" *ngIf="isNewRow" (cancelAdd)="onCancel()"></app-add-row> -->
